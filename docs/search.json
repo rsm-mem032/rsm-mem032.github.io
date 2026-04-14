@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mengyao Ma",
+    "section": "",
+    "text": "Business Analytics student at UC San Diego interested in building SQL and Tableau dashboard, conducting A/B tests, and developing data-driven recommendations.\n\nExperience\n\nAutomate365\nLVMH Perfumes&Cosmetics\nHP Tech Venture\n\n\n\nTechnical Skills\n\nSQL, Python, R\nTableau, Excel, Snowflake\nA/B Testing, Dashboarding, ETL\n\n\n\nFocus Areas\n\nData Analytics & Visualization\nMarketing and Funnel Analysis\nBusiness Intelligence\nETL and Data Integration"
+  },
+  {
+    "objectID": "projects/project2/index.html",
+    "href": "projects/project2/index.html",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "While updating my website landing page, I started thinking about a simple question: could a small change in wording lead to more newsletter sign-ups? The page includes a call to action (CTA), so I decided to compare two versions. CTA A says “Sign up for our newsletter here!” while CTA B says “Stay up to date by signing up!”\nTo figure out which one performs better, I use an A/B test. Visitors are randomly shown either CTA A or CTA B, and I compare the sign-up rates between the two groups. Random assignment matters because it helps keep the groups comparable, so any difference in conversion is more likely to come from the CTA wording rather than from differences in the visitors themselves."
+  },
+  {
+    "objectID": "projects/project2/index.html#introduction",
+    "href": "projects/project2/index.html#introduction",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "While updating my website landing page, I started thinking about a simple question: could a small change in wording lead to more newsletter sign-ups? The page includes a call to action (CTA), so I decided to compare two versions. CTA A says “Sign up for our newsletter here!” while CTA B says “Stay up to date by signing up!”\nTo figure out which one performs better, I use an A/B test. Visitors are randomly shown either CTA A or CTA B, and I compare the sign-up rates between the two groups. Random assignment matters because it helps keep the groups comparable, so any difference in conversion is more likely to come from the CTA wording rather than from differences in the visitors themselves."
+  },
+  {
+    "objectID": "projects/project2/index.html#the-ab-test-as-a-statistical-problem",
+    "href": "projects/project2/index.html#the-ab-test-as-a-statistical-problem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The A/B Test as a Statistical Problem",
+    "text": "The A/B Test as a Statistical Problem\nStatistically, each visitor has a binary outcome: signup (1) or no signup (0). So each observation can be modeled as a Bernoulli random variable.\n\nLet (_A) be the signup probability for visitors who see CTA A.\nLet (_B) be the signup probability for visitors who see CTA B.\n\nThe parameter I care about is the difference in signup probabilities:\n[ = _A - _B ]\nIts sample estimator is the difference in sample means:\n[ = X_A - X_B ]\nSince (X{0,1}), each sample mean is just a sample proportion, so this is also (= _A - _B)."
+  },
+  {
+    "objectID": "projects/project2/index.html#simulating-data",
+    "href": "projects/project2/index.html#simulating-data",
+    "title": "A/B Testing a Call to Action",
+    "section": "Simulating Data",
+    "text": "Simulating Data\nIn real A/B tests, we do not know the true values of (_A) and (_B). For this exercise, I set them myself so I can study how the estimator behaves when the truth is known.\nI use:\n[ _A = 0.22,_B = 0.18,= 0.04 ]\nThen I draw 1,000 observations from each Bernoulli distribution.\n\nn &lt;- 1000\npi_A &lt;- 0.22\npi_B &lt;- 0.18\ntrue_theta &lt;- pi_A - pi_B\n\nx_A &lt;- rbinom(n, size = 1, prob = pi_A)\nx_B &lt;- rbinom(n, size = 1, prob = pi_B)\n\nsim_df &lt;- tibble(\n  group = rep(c(\"A\", \"B\"), each = n),\n  signup = c(x_A, x_B)\n)\n\nsummary_tbl &lt;- sim_df %&gt;%\n  group_by(group) %&gt;%\n  summarise(\n    n = n(),\n    signup_rate = mean(signup),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(signup_rate = round(signup_rate, 3))\n\nsummary_tbl %&gt;%\n  render_table(title = \"Simulated A/B Data\")\n\n\n\n\n\n\n\nSimulated A/B Data\n\n\ngroup\nn\nsignup_rate\n\n\n\n\nA\n1000\n0.223\n\n\nB\n1000\n0.179"
+  },
+  {
+    "objectID": "projects/project2/index.html#the-law-of-large-numbers",
+    "href": "projects/project2/index.html#the-law-of-large-numbers",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Law of Large Numbers",
+    "text": "The Law of Large Numbers\nThe Law of Large Numbers (LLN) says that as sample size grows, the sample mean converges to the population mean. In this setting, LLN is why we expect () to get closer to the true () with enough data.\nFollowing the assignment instructions, I compute element-wise differences (d_i = X_{A,i} - X_{B,i}), then plot the cumulative average (running mean) over the first 1, 2, …, 1,000 observations.\n\n\n\n\n\n\n\n\n\nThe curve is noisy early on, but it stabilizes as more observations are included and moves toward 0.04. That is exactly what LLN predicts."
+  },
+  {
+    "objectID": "projects/project2/index.html#bootstrap-standard-errors",
+    "href": "projects/project2/index.html#bootstrap-standard-errors",
+    "title": "A/B Testing a Call to Action",
+    "section": "Bootstrap Standard Errors",
+    "text": "Bootstrap Standard Errors\nOnce I have a point estimate, the next question is precision. Bootstrap provides a practical way to estimate standard errors by resampling from observed data.\nI repeatedly sample with replacement from each group, recompute (), and then use the standard deviation of those bootstrap estimates as the bootstrap SE.\n\nB &lt;- 1000\n\nboot_theta &lt;- replicate(B, {\n  xA_star &lt;- sample(x_A, size = n, replace = TRUE)\n  xB_star &lt;- sample(x_B, size = n, replace = TRUE)\n  mean(xA_star) - mean(xB_star)\n})\n\nboot_se &lt;- sd(boot_theta)\n\npA_hat &lt;- mean(x_A)\npB_hat &lt;- mean(x_B)\n\nanalytic_se &lt;- sqrt(pA_hat * (1 - pA_hat) / n + pB_hat * (1 - pB_hat) / n)\n\ntheta_hat &lt;- pA_hat - pB_hat\n\nci_low &lt;- theta_hat - 1.96 * boot_se\nci_high &lt;- theta_hat + 1.96 * boot_se\n\nse_tbl &lt;- tibble(\n  metric = c(\"Estimate (theta_hat)\", \"Bootstrap SE\", \"Analytical SE\", \"95% CI (lower)\", \"95% CI (upper)\"),\n  value = c(theta_hat, boot_se, analytic_se, ci_low, ci_high)\n) %&gt;%\n  mutate(value = round(value, 4))\n\nse_tbl %&gt;%\n  render_table(title = \"Precision of the A/B Estimate\")\n\n\n\n\n\n\n\nPrecision of the A/B Estimate\n\n\nmetric\nvalue\n\n\n\n\nEstimate (theta_hat)\n0.0440\n\n\nBootstrap SE\n0.0171\n\n\nAnalytical SE\n0.0179\n\n\n95% CI (lower)\n0.0106\n\n\n95% CI (upper)\n0.0774\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe bootstrap SE and analytical SE are usually very close, and they are close here as well. Using the bootstrap SE, I construct a 95% confidence interval for ()."
+  },
+  {
+    "objectID": "projects/project2/index.html#the-central-limit-theorem",
+    "href": "projects/project2/index.html#the-central-limit-theorem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Central Limit Theorem",
+    "text": "The Central Limit Theorem\nThe Central Limit Theorem (CLT) says that even when raw data are not Normal (here they are Bernoulli), sampling distributions of sample means become approximately Normal as sample size increases.\nI simulate sampling distributions of () for (n {25, 50, 100, 500}), using 1,000 repetitions per sample size.\n\n\n\n\n\n\n\n\n\nAt (n=25), the histogram is rougher and less smooth. As (n) grows, the distribution becomes more bell-shaped, which is the CLT pattern we expect."
+  },
+  {
+    "objectID": "projects/project2/index.html#hypothesis-testing",
+    "href": "projects/project2/index.html#hypothesis-testing",
+    "title": "A/B Testing a Call to Action",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nGiven the CLT, I can run a formal test of:\n[ H_0: = 0, H_1: ]\nwith test statistic:\n[ z = ]\nUnder (H_0), () is centered at 0 and approximately Normal in large samples. Dividing by its SE standardizes it, giving a statistic that is approximately standard Normal, which allows direct p-value calculation.\nPeople often call this a t-test in practice, but with Bernoulli outcomes and CLT-based approximation, this setup is closer to a z-test. In large samples, the practical difference is minimal.\n\nz_stat &lt;- theta_hat / analytic_se\np_val &lt;- 2 * (1 - pnorm(abs(z_stat)))\n\nht_tbl &lt;- tibble(\n  quantity = c(\"theta_hat\", \"SE(theta_hat)\", \"z statistic\", \"two-sided p-value\"),\n  value = c(theta_hat, analytic_se, z_stat, p_val)\n) %&gt;%\n  mutate(value = round(value, 5))\n\nht_tbl %&gt;%\n  render_table(title = \"Two-Sided Hypothesis Test (Normal Reference)\")\n\n\n\n\n\n\n\nTwo-Sided Hypothesis Test (Normal Reference)\n\n\nquantity\nvalue\n\n\n\n\ntheta_hat\n0.04400\n\n\nSE(theta_hat)\n0.01789\n\n\nz statistic\n2.45879\n\n\ntwo-sided p-value\n0.01394\n\n\n\n\n\n\n\nIf the p-value is below 0.05, I reject (H_0) and conclude the signup rates differ statistically. Otherwise, I do not have enough evidence to rule out no true difference."
+  },
+  {
+    "objectID": "projects/project2/index.html#the-t-test-as-a-regression",
+    "href": "projects/project2/index.html#the-t-test-as-a-regression",
+    "title": "A/B Testing a Call to Action",
+    "section": "The T-Test as a Regression",
+    "text": "The T-Test as a Regression\nThe two-sample test is mathematically equivalent to a simple regression:\n[ Y_i = _0 + _1 D_i + _i ]\nwhere (Y_i) is signup (0/1), and (D_i=1) for CTA A, (D_i=0) for CTA B.\n\n(_0): mean signup rate in group B ((_B))\n(_1): mean difference between A and B ((_A - _B = ))\n\n\nreg_df &lt;- tibble(\n  Y = c(x_A, x_B),\n  D = c(rep(1, n), rep(0, n))\n)\n\nfit &lt;- lm(Y ~ D, data = reg_df)\nfit_tidy &lt;- tidy(fit)\n\nreg_main &lt;- fit_tidy %&gt;%\n  filter(term == \"D\") %&gt;%\n  transmute(\n    estimate = estimate,\n    std_error = std.error,\n    t_stat = statistic,\n    p_value = p.value\n  )\n\ncompare_tbl &lt;- tibble(\n  method = c(\"Difference in means\", \"Regression coefficient on D\"),\n  estimate = c(theta_hat, reg_main$estimate),\n  se = c(analytic_se, reg_main$std_error),\n  statistic = c(z_stat, reg_main$t_stat),\n  p_value = c(p_val, reg_main$p_value)\n) %&gt;%\n  mutate(across(c(estimate, se, statistic, p_value), ~ round(.x, 5)))\n\ncompare_tbl %&gt;%\n  render_table(title = \"Two-Sample Test vs. Regression Formulation\")\n\n\n\n\n\n\n\nTwo-Sample Test vs. Regression Formulation\n\n\nmethod\nestimate\nse\nstatistic\np_value\n\n\n\n\nDifference in means\n0.044\n0.01789\n2.45879\n0.01394\n\n\nRegression coefficient on D\n0.044\n0.01790\n2.45756\n0.01407\n\n\n\n\n\n\n\nThe two approaches should be very close. Small differences can come from standard error conventions (separate-variance formula vs default OLS assumptions). The practical value of this equivalence is that regression frameworks scale naturally to controls, interactions, and more complex experiments."
+  },
+  {
+    "objectID": "projects/project2/index.html#the-problem-with-peeking",
+    "href": "projects/project2/index.html#the-problem-with-peeking",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Problem with Peeking",
+    "text": "The Problem with Peeking\nNow for a common real-world issue: peeking at results repeatedly before data collection is complete.\nIf each interim check uses (), every peek is another chance for a false positive. So the overall false positive probability across many peeks is higher than 5%.\nI simulate the null case ((_A = _B = 0.20)): in each experiment, I generate 1,000 observations per group, test after every 100 observations per group (10 peeks total), and record whether any p-value is below 0.05. I repeat this for 10,000 experiments.\n\nset.seed(20260414)\n\nR_peek &lt;- 10000\npeek_ns &lt;- seq(100, 1000, by = 100)\npi_null &lt;- 0.20\n\none_experiment_any_sig &lt;- function() {\n  a &lt;- rbinom(1000, 1, pi_null)\n  b &lt;- rbinom(1000, 1, pi_null)\n\n  for (nn in peek_ns) {\n    a_n &lt;- a[1:nn]\n    b_n &lt;- b[1:nn]\n    th &lt;- mean(a_n) - mean(b_n)\n    se &lt;- sqrt(mean(a_n) * (1 - mean(a_n)) / nn + mean(b_n) * (1 - mean(b_n)) / nn)\n\n    if (se == 0) next\n\n    z &lt;- th / se\n    p &lt;- 2 * (1 - pnorm(abs(z)))\n\n    if (p &lt; 0.05) return(TRUE)\n  }\n  FALSE\n}\n\nany_sig &lt;- replicate(R_peek, one_experiment_any_sig())\nfp_rate_peek &lt;- mean(any_sig)\n\nsingle_test_fp &lt;- 0.05\n\npeek_tbl &lt;- tibble(\n  scenario = c(\"Single test at alpha = 0.05\", \"Peeking 10 times (every +100 users/group)\"),\n  false_positive_rate = c(single_test_fp, fp_rate_peek)\n) %&gt;%\n  mutate(false_positive_rate = scales::percent(false_positive_rate, accuracy = 0.1))\n\npeek_tbl %&gt;%\n  render_table(title = \"False Positive Rate Inflation from Peeking\")\n\n\n\n\n\n\n\nFalse Positive Rate Inflation from Peeking\n\n\nscenario\nfalse_positive_rate\n\n\n\n\nSingle test at alpha = 0.05\n5.0%\n\n\nPeeking 10 times (every +100 users/group)\n19.8%\n\n\n\n\n\n\n\nThe peeking false positive rate is typically much higher than 5%. In practical terms, if stopping rules are not pre-registered (or corrected for repeated looks), A/B test decisions become too optimistic."
+  },
+  {
+    "objectID": "projects/project2/index.html#closing-notes",
+    "href": "projects/project2/index.html#closing-notes",
+    "title": "A/B Testing a Call to Action",
+    "section": "Closing Notes",
+    "text": "Closing Notes\nMy three main takeaways from this exercise are:\n\nPoint estimates are only the beginning; uncertainty (SEs and confidence intervals) is essential.\nCLT makes many large-sample tools workable, but assumptions and approximations still matter.\nExperimental design choices (like peeking) directly affect error rates, not just final p-values."
+  },
+  {
+    "objectID": "hw1_questions.html",
+    "href": "hw1_questions.html",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "I have been updating my website landing page and wanted to improve newsletter conversion. The page includes a call to action (CTA), and I decided to test two versions:\n\nCTA A: “Sign up for our newsletter here!”\nCTA B: “Stay up to date by signing up!”\n\nI use a standard A/B test to compare them: visitors are randomly assigned to see either A or B, and then I compare signup rates across the two groups. The point of random assignment is to make the groups as comparable as possible so that I can isolate the effect of the wording itself."
+  },
+  {
+    "objectID": "hw1_questions.html#introduction",
+    "href": "hw1_questions.html#introduction",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "I have been updating my website landing page and wanted to improve newsletter conversion. The page includes a call to action (CTA), and I decided to test two versions:\n\nCTA A: “Sign up for our newsletter here!”\nCTA B: “Stay up to date by signing up!”\n\nI use a standard A/B test to compare them: visitors are randomly assigned to see either A or B, and then I compare signup rates across the two groups. The point of random assignment is to make the groups as comparable as possible so that I can isolate the effect of the wording itself."
+  },
+  {
+    "objectID": "hw1_questions.html#the-ab-test-as-a-statistical-problem",
+    "href": "hw1_questions.html#the-ab-test-as-a-statistical-problem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The A/B Test as a Statistical Problem",
+    "text": "The A/B Test as a Statistical Problem\nStatistically, each visitor has a binary outcome: signup (1) or no signup (0). So each observation can be modeled as a Bernoulli random variable.\n\nLet (_A) be the signup probability for visitors who see CTA A.\nLet (_B) be the signup probability for visitors who see CTA B.\n\nThe parameter I care about is the difference in signup probabilities:\n[ = _A - _B ]\nIts sample estimator is the difference in sample means:\n[ = X_A - X_B ]\nSince (X{0,1}), each sample mean is just a sample proportion, so this is also (= _A - _B)."
+  },
+  {
+    "objectID": "hw1_questions.html#simulating-data",
+    "href": "hw1_questions.html#simulating-data",
+    "title": "A/B Testing a Call to Action",
+    "section": "Simulating Data",
+    "text": "Simulating Data\nIn real A/B tests, we do not know the true values of (_A) and (_B). For this exercise, I set them myself so I can study how the estimator behaves when the truth is known.\nI use:\n[ _A = 0.22,_B = 0.18,= 0.04 ]\nThen I draw 1,000 observations from each Bernoulli distribution.\n\nn &lt;- 1000\npi_A &lt;- 0.22\npi_B &lt;- 0.18\ntrue_theta &lt;- pi_A - pi_B\n\nx_A &lt;- rbinom(n, size = 1, prob = pi_A)\nx_B &lt;- rbinom(n, size = 1, prob = pi_B)\n\nsim_df &lt;- tibble(\n  group = rep(c(\"A\", \"B\"), each = n),\n  signup = c(x_A, x_B)\n)\n\nsummary_tbl &lt;- sim_df %&gt;%\n  group_by(group) %&gt;%\n  summarise(\n    n = n(),\n    signup_rate = mean(signup),\n    .groups = \"drop\"\n  ) %&gt;%\n  mutate(signup_rate = round(signup_rate, 3))\n\nsummary_tbl %&gt;%\n  render_table(title = \"Simulated A/B Data\")\n\n\n\n\n\n\n\nSimulated A/B Data\n\n\ngroup\nn\nsignup_rate\n\n\n\n\nA\n1000\n0.223\n\n\nB\n1000\n0.179"
+  },
+  {
+    "objectID": "hw1_questions.html#the-law-of-large-numbers",
+    "href": "hw1_questions.html#the-law-of-large-numbers",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Law of Large Numbers",
+    "text": "The Law of Large Numbers\nThe Law of Large Numbers (LLN) says that as sample size grows, the sample mean converges to the population mean. In this setting, LLN is why we expect () to get closer to the true () with enough data.\nFollowing the assignment instructions, I compute element-wise differences (d_i = X_{A,i} - X_{B,i}), then plot the cumulative average (running mean) over the first 1, 2, …, 1,000 observations.\n\n\n\n\n\n\n\n\n\nThe curve is noisy early on, but it stabilizes as more observations are included and moves toward 0.04. That is exactly what LLN predicts."
+  },
+  {
+    "objectID": "hw1_questions.html#bootstrap-standard-errors",
+    "href": "hw1_questions.html#bootstrap-standard-errors",
+    "title": "A/B Testing a Call to Action",
+    "section": "Bootstrap Standard Errors",
+    "text": "Bootstrap Standard Errors\nOnce I have a point estimate, the next question is precision. Bootstrap provides a practical way to estimate standard errors by resampling from observed data.\nI repeatedly sample with replacement from each group, recompute (), and then use the standard deviation of those bootstrap estimates as the bootstrap SE.\n\nB &lt;- 1000\n\nboot_theta &lt;- replicate(B, {\n  xA_star &lt;- sample(x_A, size = n, replace = TRUE)\n  xB_star &lt;- sample(x_B, size = n, replace = TRUE)\n  mean(xA_star) - mean(xB_star)\n})\n\nboot_se &lt;- sd(boot_theta)\n\npA_hat &lt;- mean(x_A)\npB_hat &lt;- mean(x_B)\n\nanalytic_se &lt;- sqrt(pA_hat * (1 - pA_hat) / n + pB_hat * (1 - pB_hat) / n)\n\ntheta_hat &lt;- pA_hat - pB_hat\n\nci_low &lt;- theta_hat - 1.96 * boot_se\nci_high &lt;- theta_hat + 1.96 * boot_se\n\nse_tbl &lt;- tibble(\n  metric = c(\"Estimate (theta_hat)\", \"Bootstrap SE\", \"Analytical SE\", \"95% CI (lower)\", \"95% CI (upper)\"),\n  value = c(theta_hat, boot_se, analytic_se, ci_low, ci_high)\n) %&gt;%\n  mutate(value = round(value, 4))\n\nse_tbl %&gt;%\n  render_table(title = \"Precision of the A/B Estimate\")\n\n\n\n\n\n\n\nPrecision of the A/B Estimate\n\n\nmetric\nvalue\n\n\n\n\nEstimate (theta_hat)\n0.0440\n\n\nBootstrap SE\n0.0171\n\n\nAnalytical SE\n0.0179\n\n\n95% CI (lower)\n0.0106\n\n\n95% CI (upper)\n0.0774\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe bootstrap SE and analytical SE are usually very close, and they are close here as well. Using the bootstrap SE, I construct a 95% confidence interval for ()."
+  },
+  {
+    "objectID": "hw1_questions.html#the-central-limit-theorem",
+    "href": "hw1_questions.html#the-central-limit-theorem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Central Limit Theorem",
+    "text": "The Central Limit Theorem\nThe Central Limit Theorem (CLT) says that even when raw data are not Normal (here they are Bernoulli), sampling distributions of sample means become approximately Normal as sample size increases.\nI simulate sampling distributions of () for (n {25, 50, 100, 500}), using 1,000 repetitions per sample size.\n\n\n\n\n\n\n\n\n\nAt (n=25), the histogram is rougher and less smooth. As (n) grows, the distribution becomes more bell-shaped, which is the CLT pattern we expect."
+  },
+  {
+    "objectID": "hw1_questions.html#hypothesis-testing",
+    "href": "hw1_questions.html#hypothesis-testing",
+    "title": "A/B Testing a Call to Action",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nGiven the CLT, I can run a formal test of:\n[ H_0: = 0, H_1: ]\nwith test statistic:\n[ z = ]\nUnder (H_0), () is centered at 0 and approximately Normal in large samples. Dividing by its SE standardizes it, giving a statistic that is approximately standard Normal, which allows direct p-value calculation.\nPeople often call this a t-test in practice, but with Bernoulli outcomes and CLT-based approximation, this setup is closer to a z-test. In large samples, the practical difference is minimal.\n\nz_stat &lt;- theta_hat / analytic_se\np_val &lt;- 2 * (1 - pnorm(abs(z_stat)))\n\nht_tbl &lt;- tibble(\n  quantity = c(\"theta_hat\", \"SE(theta_hat)\", \"z statistic\", \"two-sided p-value\"),\n  value = c(theta_hat, analytic_se, z_stat, p_val)\n) %&gt;%\n  mutate(value = round(value, 5))\n\nht_tbl %&gt;%\n  render_table(title = \"Two-Sided Hypothesis Test (Normal Reference)\")\n\n\n\n\n\n\n\nTwo-Sided Hypothesis Test (Normal Reference)\n\n\nquantity\nvalue\n\n\n\n\ntheta_hat\n0.04400\n\n\nSE(theta_hat)\n0.01789\n\n\nz statistic\n2.45879\n\n\ntwo-sided p-value\n0.01394\n\n\n\n\n\n\n\nIf the p-value is below 0.05, I reject (H_0) and conclude the signup rates differ statistically. Otherwise, I do not have enough evidence to rule out no true difference."
+  },
+  {
+    "objectID": "hw1_questions.html#the-t-test-as-a-regression",
+    "href": "hw1_questions.html#the-t-test-as-a-regression",
+    "title": "A/B Testing a Call to Action",
+    "section": "The T-Test as a Regression",
+    "text": "The T-Test as a Regression\nThe two-sample test is mathematically equivalent to a simple regression:\n[ Y_i = _0 + _1 D_i + _i ]\nwhere (Y_i) is signup (0/1), and (D_i=1) for CTA A, (D_i=0) for CTA B.\n\n(_0): mean signup rate in group B ((_B))\n(_1): mean difference between A and B ((_A - _B = ))\n\n\nreg_df &lt;- tibble(\n  Y = c(x_A, x_B),\n  D = c(rep(1, n), rep(0, n))\n)\n\nfit &lt;- lm(Y ~ D, data = reg_df)\nfit_tidy &lt;- tidy(fit)\n\nreg_main &lt;- fit_tidy %&gt;%\n  filter(term == \"D\") %&gt;%\n  transmute(\n    estimate = estimate,\n    std_error = std.error,\n    t_stat = statistic,\n    p_value = p.value\n  )\n\ncompare_tbl &lt;- tibble(\n  method = c(\"Difference in means\", \"Regression coefficient on D\"),\n  estimate = c(theta_hat, reg_main$estimate),\n  se = c(analytic_se, reg_main$std_error),\n  statistic = c(z_stat, reg_main$t_stat),\n  p_value = c(p_val, reg_main$p_value)\n) %&gt;%\n  mutate(across(c(estimate, se, statistic, p_value), ~ round(.x, 5)))\n\ncompare_tbl %&gt;%\n  render_table(title = \"Two-Sample Test vs. Regression Formulation\")\n\n\n\n\n\n\n\nTwo-Sample Test vs. Regression Formulation\n\n\nmethod\nestimate\nse\nstatistic\np_value\n\n\n\n\nDifference in means\n0.044\n0.01789\n2.45879\n0.01394\n\n\nRegression coefficient on D\n0.044\n0.01790\n2.45756\n0.01407\n\n\n\n\n\n\n\nThe two approaches should be very close. Small differences can come from standard error conventions (separate-variance formula vs default OLS assumptions). The practical value of this equivalence is that regression frameworks scale naturally to controls, interactions, and more complex experiments."
+  },
+  {
+    "objectID": "hw1_questions.html#the-problem-with-peeking",
+    "href": "hw1_questions.html#the-problem-with-peeking",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Problem with Peeking",
+    "text": "The Problem with Peeking\nNow for a common real-world issue: peeking at results repeatedly before data collection is complete.\nIf each interim check uses (), every peek is another chance for a false positive. So the overall false positive probability across many peeks is higher than 5%.\nI simulate the null case ((_A = _B = 0.20)): in each experiment, I generate 1,000 observations per group, test after every 100 observations per group (10 peeks total), and record whether any p-value is below 0.05. I repeat this for 10,000 experiments.\n\nset.seed(20260414)\n\nR_peek &lt;- 10000\npeek_ns &lt;- seq(100, 1000, by = 100)\npi_null &lt;- 0.20\n\none_experiment_any_sig &lt;- function() {\n  a &lt;- rbinom(1000, 1, pi_null)\n  b &lt;- rbinom(1000, 1, pi_null)\n\n  for (nn in peek_ns) {\n    a_n &lt;- a[1:nn]\n    b_n &lt;- b[1:nn]\n    th &lt;- mean(a_n) - mean(b_n)\n    se &lt;- sqrt(mean(a_n) * (1 - mean(a_n)) / nn + mean(b_n) * (1 - mean(b_n)) / nn)\n\n    if (se == 0) next\n\n    z &lt;- th / se\n    p &lt;- 2 * (1 - pnorm(abs(z)))\n\n    if (p &lt; 0.05) return(TRUE)\n  }\n  FALSE\n}\n\nany_sig &lt;- replicate(R_peek, one_experiment_any_sig())\nfp_rate_peek &lt;- mean(any_sig)\n\nsingle_test_fp &lt;- 0.05\n\npeek_tbl &lt;- tibble(\n  scenario = c(\"Single test at alpha = 0.05\", \"Peeking 10 times (every +100 users/group)\"),\n  false_positive_rate = c(single_test_fp, fp_rate_peek)\n) %&gt;%\n  mutate(false_positive_rate = scales::percent(false_positive_rate, accuracy = 0.1))\n\npeek_tbl %&gt;%\n  render_table(title = \"False Positive Rate Inflation from Peeking\")\n\n\n\n\n\n\n\nFalse Positive Rate Inflation from Peeking\n\n\nscenario\nfalse_positive_rate\n\n\n\n\nSingle test at alpha = 0.05\n5.0%\n\n\nPeeking 10 times (every +100 users/group)\n19.8%\n\n\n\n\n\n\n\nThe peeking false positive rate is typically much higher than 5%. In practical terms, if stopping rules are not pre-registered (or corrected for repeated looks), A/B test decisions become too optimistic."
+  },
+  {
+    "objectID": "hw1_questions.html#closing-notes",
+    "href": "hw1_questions.html#closing-notes",
+    "title": "A/B Testing a Call to Action",
+    "section": "Closing Notes",
+    "text": "Closing Notes\nMy three main takeaways from this exercise are:\n\nPoint estimates are only the beginning; uncertainty (SEs and confidence intervals) is essential.\nCLT makes many large-sample tools workable, but assumptions and approximations still matter.\nExperimental design choices (like peeking) directly affect error rates, not just final p-values."
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download PDF file.\nYou can download my resume below:\nDownload Resume"
+  },
+  {
+    "objectID": "projects/project1/index.html",
+    "href": "projects/project1/index.html",
+    "title": "Analysis of Cars",
+    "section": "",
+    "text": "Let’s investigate the relationship between fuel efficiency (mpg) and engine displacement (disp) from the mtcars dataset. Those variables have a correlation of -0.85.\n\n\nHere is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
+  },
+  {
+    "objectID": "projects/project1/index.html#sub-header",
+    "href": "projects/project1/index.html#sub-header",
+    "title": "Analysis of Cars",
+    "section": "",
+    "text": "Here is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "My Projects",
+    "section": "",
+    "text": "A/B Testing a Call to Action\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 13, 2026\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of Cars\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 6, 2026\n\n\n\n\n\n\nNo matching items"
+  }
+]

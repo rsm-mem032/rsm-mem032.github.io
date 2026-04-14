@@ -1,0 +1,29 @@
+---
+title: "Mengyao Ma"
+image: "profile.jpg"
+about:
+  template: trestles
+  links:
+    - icon: envelope
+      href: mailto:mem032@ucsd.edu
+    - icon: linkedin
+      href: https://www.linkedin.com/in/mengyao-ma-a25409382/
+---
+
+Business Analytics student at UC San Diego interested in building SQL and Tableau dashboard, conducting A/B tests, and developing data-driven recommendations.
+
+### Experience
+- Automate365
+- LVMH Perfumes&Cosmetics
+- HP Tech Venture
+
+### Technical Skills
+- SQL, Python, R
+- Tableau, Excel, Snowflake
+- A/B Testing, Dashboarding, ETL
+
+### Focus Areas
+- Data Analytics & Visualization
+- Marketing and Funnel Analysis
+- Business Intelligence
+- ETL and Data Integration
