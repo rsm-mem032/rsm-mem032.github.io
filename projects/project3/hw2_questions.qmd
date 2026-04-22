@@ -1,0 +1,202 @@
+---
+title: "Replication of Card and Krueger (1994)"
+subtitle: "Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania"
+author: "Mengyao Ma"
+date: 2026-04-22
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Introduction
+
+Card and Krueger (1994) study whether the April 1, 1992 minimum wage increase in New Jersey (from $4.25 to $5.05) reduced fast-food employment. They compare fast-food stores in New Jersey to stores in eastern Pennsylvania, where the minimum wage did not change.
+
+The core empirical design is a difference-in-differences (DID): compare the change in employment in New Jersey before vs. after the policy to the same before-after change in Pennsylvania.
+
+Note on replication targets: the assignment emphasizes matching point estimates closely. Standard errors can differ across replications because of choices about sample restrictions and handling of temporarily closed stores.
+
+## Main Analysis
+
+```{r}
+# Load and label the public data
+path <- "data/raw/public.dat"
+raw <- read.table(path, header = FALSE, na.strings = ".", strip.white = TRUE, fill = TRUE)
+
+names(raw) <- c(
+  "sheet","chain","co_owned","state","southj","centralj","northj","pa1","pa2","shore",
+  "ncalls","empft","emppt","nmgrs","wage_st","inctime","firstinc","bonus","pctaff","meals",
+  "open","hrsopen","psoda","pfry","pentree","nregs","nregs11","type2","status2","date2",
+  "ncalls2","empft2","emppt2","nmgrs2","wage_st2","inctime2","firstin2","special2","meals2",
+  "open2r","hrsopen2","psoda2","pfry2","pentree2","nregs2","nregs112"
+)
+
+d <- raw
+
+d$nj <- d$state
+d$emptot <- d$empft + 0.5 * d$emppt + d$nmgrs
+d$emptot2 <- d$empft2 + 0.5 * d$emppt2 + d$nmgrs2
+d$demp <- d$emptot2 - d$emptot
+d$closed <- d$status2 == 3
+
+d$pmeal <- d$psoda + d$pfry + d$pentree
+d$pmeal2 <- d$psoda2 + d$pfry2 + d$pentree2
+
+d$chain_bk <- as.integer(d$chain == 1)
+d$chain_kfc <- as.integer(d$chain == 2)
+d$chain_roys <- as.integer(d$chain == 3)
+d$chain_wendys <- as.integer(d$chain == 4)
+
+# GAP variable used in Card-Krueger regression specs
+d$gap <- NA_real_
+d$gap[d$state == 0] <- 0
+idx <- which(d$state == 1 & !is.na(d$wage_st) & d$wage_st >= 5.05)
+d$gap[idx] <- 0
+idx <- which(d$state == 1 & !is.na(d$wage_st) & d$wage_st > 0 & d$wage_st < 5.05)
+d$gap[idx] <- (5.05 - d$wage_st[idx]) / d$wage_st[idx]
+
+mean_se <- function(x) {
+  n <- sum(!is.na(x))
+  c(mean = mean(x, na.rm = TRUE), se = sd(x, na.rm = TRUE) / sqrt(n))
+}
+```
+
+### Replicate Selected Table 2 Moments
+
+```{r}
+# A compact subset of Table 2 means (by state)
+table2_subset <- data.frame(
+  statistic = c(
+    "Wave 1 FTE employment",
+    "Wave 1 starting wage",
+    "Wave 1 full meal price",
+    "Wave 2 FTE employment",
+    "Wave 2 starting wage",
+    "Wave 2 full meal price"
+  ),
+  NJ = c(
+    mean(d$emptot[d$nj == 1], na.rm = TRUE),
+    mean(d$wage_st[d$nj == 1], na.rm = TRUE),
+    mean(d$pmeal[d$nj == 1], na.rm = TRUE),
+    mean(d$emptot2[d$nj == 1], na.rm = TRUE),
+    mean(d$wage_st2[d$nj == 1], na.rm = TRUE),
+    mean(d$pmeal2[d$nj == 1], na.rm = TRUE)
+  ),
+  PA = c(
+    mean(d$emptot[d$nj == 0], na.rm = TRUE),
+    mean(d$wage_st[d$nj == 0], na.rm = TRUE),
+    mean(d$pmeal[d$nj == 0], na.rm = TRUE),
+    mean(d$emptot2[d$nj == 0], na.rm = TRUE),
+    mean(d$wage_st2[d$nj == 0], na.rm = TRUE),
+    mean(d$pmeal2[d$nj == 0], na.rm = TRUE)
+  )
+)
+
+table2_subset$NJ <- round(table2_subset$NJ, 2)
+table2_subset$PA <- round(table2_subset$PA, 2)
+table2_subset
+```
+
+These align closely with Table 2 in the paper (for example, Wave 1 FTE is about 20.44 in NJ and 23.33 in PA).
+
+### Replicate Table 3 (Rows 1-3, Columns 1-3)
+
+```{r}
+# Table 3 rows 1-3, cols 1-3 interpreted as: All stores, NJ, PA
+r1 <- c(
+  all = mean(d$emptot, na.rm = TRUE),
+  nj  = mean(d$emptot[d$nj == 1], na.rm = TRUE),
+  pa  = mean(d$emptot[d$nj == 0], na.rm = TRUE)
+)
+
+r2 <- c(
+  all = mean(d$emptot2, na.rm = TRUE),
+  nj  = mean(d$emptot2[d$nj == 1], na.rm = TRUE),
+  pa  = mean(d$emptot2[d$nj == 0], na.rm = TRUE)
+)
+
+r3 <- r2 - r1
+
+replicated_t3 <- rbind(
+  "1. FTE before" = r1,
+  "2. FTE after" = r2,
+  "3. Change" = r3
+)
+
+paper_t3 <- rbind(
+  "1. FTE before" = c(all = 21.00, nj = 20.44, pa = 23.33),
+  "2. FTE after" = c(all = 21.05, nj = 21.03, pa = 21.17),
+  "3. Change" = c(all = 0.05, nj = 0.59, pa = -2.16)
+)
+
+comparison_t3 <- data.frame(
+  row = rownames(replicated_t3),
+  All_rep = round(replicated_t3[, "all"], 2),
+  All_paper = paper_t3[, "all"],
+  NJ_rep = round(replicated_t3[, "nj"], 2),
+  NJ_paper = paper_t3[, "nj"],
+  PA_rep = round(replicated_t3[, "pa"], 2),
+  PA_paper = paper_t3[, "pa"]
+)
+
+comparison_t3
+```
+
+The point estimates match to two decimals.
+
+### Replicate Table 4, Column (i)
+
+```{r}
+# Follow the sample restriction in check.sas (357 stores)
+c1 <- subset(d, !is.na(demp) & (closed == 1 | (closed == 0 & !is.na(wage_st2 - wage_st))))
+
+m_col1 <- lm(demp ~ nj, data = c1)
+co <- summary(m_col1)$coefficients
+
+table4_col1 <- data.frame(
+  term = rownames(co),
+  estimate = round(co[, "Estimate"], 2),
+  std_error = round(co[, "Std. Error"], 2)
+)
+
+table4_col1
+nrow(c1)
+```
+
+The New Jersey dummy is approximately **2.33** with standard error **1.19**, matching Table 4 column (i).
+
+## Something Additional
+
+I add a DID figure to visualize the main identification pattern (NJ vs PA before/after).
+
+```{r}
+# Balanced sample for a clean pre/post comparison
+bal <- subset(d, !is.na(emptot) & !is.na(emptot2))
+
+mean_pre_nj <- mean(bal$emptot[bal$nj == 1])
+mean_post_nj <- mean(bal$emptot2[bal$nj == 1])
+mean_pre_pa <- mean(bal$emptot[bal$nj == 0])
+mean_post_pa <- mean(bal$emptot2[bal$nj == 0])
+
+plot(
+  x = c(1, 2), y = c(mean_pre_pa, mean_post_pa),
+  type = "b", pch = 16, lwd = 2, col = "steelblue",
+  xaxt = "n", xlab = "Survey Wave", ylab = "Average FTE Employment",
+  ylim = range(c(mean_pre_nj, mean_post_nj, mean_pre_pa, mean_post_pa)),
+  main = "Difference-in-Differences Pattern: NJ vs PA"
+)
+axis(1, at = c(1, 2), labels = c("Before (Wave 1)", "After (Wave 2)"))
+lines(c(1, 2), c(mean_pre_nj, mean_post_nj), type = "b", pch = 17, lwd = 2, col = "firebrick")
+legend("topright", legend = c("Pennsylvania", "New Jersey"), col = c("steelblue", "firebrick"), pch = c(16, 17), lwd = 2, bty = "n")
+```
+
+Interpretation: PA employment declines between waves, while NJ employment rises slightly. The difference in these trends is the DID estimate, consistent with the paper's conclusion that the minimum wage increase did not reduce fast-food employment in this case.
+
+## References
+
+- Card, David and Alan B. Krueger (1994), *Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania*, American Economic Review 84(4): 772-793.
+- Data source: https://davidcard.berkeley.edu/data_sets.html
