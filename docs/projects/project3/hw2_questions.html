@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#replicate-table-3-rows-1-3-columns-1-3" id="toc-replicate-table-3-rows-1-3-columns-1-3" class="nav-link" data-scroll-target="#replicate-table-3-rows-1-3-columns-1-3">Replicate Table 3 (Rows 1-3, Columns 1-3)</a></li>
   <li><a href="#replicate-table-4-column-i" id="toc-replicate-table-4-column-i" class="nav-link" data-scroll-target="#replicate-table-4-column-i">Replicate Table 4, Column (i)</a></li>
   </ul></li>
-  <li><a href="#something-additional" id="toc-something-additional" class="nav-link" data-scroll-target="#something-additional">Something Additional</a></li>
+  <li><a href="#something-additional-difference-in-differences-visualization" id="toc-something-additional-difference-in-differences-visualization" class="nav-link" data-scroll-target="#something-additional-difference-in-differences-visualization">Something Additional (Difference-in-Differences Visualization)</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6 Wave 2 full meal price  3.41  3.03</code></pre>
 </div>
 </div>
-<p>These align closely with Table 2 in the paper (for example, Wave 1 FTE is about 20.44 in NJ and 23.33 in PA).</p>
+<p>These estimates align closely with Table 2 in the paper. For example, Wave 1 FTE employment is about 20.44 in New Jersey and 23.33 in Pennsylvania, indicating that the replicated summary statistics are consistent with the published results.</p>
 </section>
 <section id="replicate-table-3-rows-1-3-columns-1-3" class="level3">
 <h3 class="anchored" data-anchor-id="replicate-table-3-rows-1-3-columns-1-3">Replicate Table 3 (Rows 1-3, Columns 1-3)</h3>
@@ -345,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3. Change         3. Change    0.06      0.05   0.59     0.59  -2.17    -2.16</code></pre>
 </div>
 </div>
-<p>The point estimates match to two decimals.</p>
+<p>The replicated point estimates match the published values to two decimal places, which suggests that the data preparation and sample construction are consistent with the original analysis.</p>
 </section>
 <section id="replicate-table-4-column-i" class="level3">
 <h3 class="anchored" data-anchor-id="replicate-table-4-column-i">Replicate Table 4, Column (i)</h3>
@@ -376,9 +376,9 @@ nj                   nj     2.33      1.19</code></pre>
 <p>The New Jersey dummy is approximately <strong>2.33</strong> with standard error <strong>1.19</strong>, matching Table 4 column (i).</p>
 </section>
 </section>
-<section id="something-additional" class="level2">
-<h2 class="anchored" data-anchor-id="something-additional">Something Additional</h2>
-<p>I add a DID figure to visualize the main identification pattern (NJ vs PA before/after).</p>
+<section id="something-additional-difference-in-differences-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="something-additional-difference-in-differences-visualization">Something Additional (Difference-in-Differences Visualization)</h2>
+<p>I add a DID figure to visualize the main identification pattern by comparing New Jersey and Pennsylvania before and after the policy change.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Balanced sample for a clean pre/post comparison</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>bal <span class="ot">&lt;-</span> <span class="fu">subset</span>(d, <span class="sc">!</span><span class="fu">is.na</span>(emptot) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(emptot2))</span>

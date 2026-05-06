@@ -1,0 +1,105 @@
+---
+title: "From Ad Clicks to Customer Value"
+subtitle: "How Funnel Analysis Improves Marketing Decisions"
+author: "Mengyao Ma"
+date: "2026-04-30"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    progress: true
+    controls: true
+    transition: fade
+    background-transition: fade
+    toc: false
+    incremental: false
+    embed-resources: true
+execute:
+  echo: false
+---
+
+## 02 / 06 The click problem: activity can look like growth
+
+### Why top-of-funnel metrics can mislead
+
+- Visible acquisition metrics are useful, but can hide weak downstream economics.
+- High CTR or low CPC can make campaigns look efficient before we know real value.
+- Traffic can increase while retention and payback remain poor.
+
+### Decision shift
+
+- Clicks answer: **Who reacted?**
+- Funnel analysis answers: **Who activated, retained, and created value?**
+
+## 03 / 06 A strong funnel connects behavior to economics
+
+### Funnel logic
+
+1. Reach qualified audience
+2. Click as intent signal
+3. Activate first-value moment
+4. Purchase monetization
+5. Retain for CLV / payback
+
+### Three diagnostic questions
+
+- Where is the biggest leak in the funnel?
+- How much customer value is lost at that stage?
+- Which intervention creates the highest economic impact?
+
+## 04 / 06 Real example: Starbucks Rewards as a customer-value funnel
+
+**Why this example matters**
+
+- Campaign or offer brings customers into the app / Rewards program.
+- First purchase creates a measurable baseline.
+- Personalized rewards increase repeat visits and lifetime value.
+
+::: {.columns}
+::: {.column width="33%"}
+**33.8M**
+
+U.S. 90-day active Rewards members (Q4 FY2024)
+:::
+::: {.column width="33%"}
+**+4%**
+
+Year-over-year growth in that quarter
+:::
+::: {.column width="34%"}
+**$36.2B**
+
+FY2024 consolidated net revenue
+:::
+:::
+
+_Source: Starbucks Q4 FY2024 results and FY2024 annual report._
+
+## 05 / 06 Decision example: the best lever may not be more clicks
+
+### Illustrative funnel math
+
+| Stage | Users |
+|---|---:|
+| Clicks | 100,000 |
+| Sign-ups | 12,000 |
+| Activated | 7,000 |
+| First purchases | 3,200 |
+| Retained | 1,600 |
+
+### Strategic options
+
+- **Option A: Buy more clicks** - More scale, but also more media cost.
+- **Option B: Improve activation** - More users reach first value and downstream conversion improves.
+- **Option C: Improve retention** - Often the highest-value lever as repeat revenue rises without repaying acquisition cost.
+
+## 06 / 06 Takeaway: optimize for customer equity, not campaign activity
+
+1. Clicks are a signal, not the destination.
+2. Rank bottlenecks by value loss, not just visibility.
+3. Segment by channel, creative, region, offer, and customer type.
+
+::: {.callout-tip appearance="simple"}
+The best marketers do not stop at "what converted?"  
+They ask: **"what created customers worth keeping?"**
+:::

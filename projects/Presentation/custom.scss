@@ -1,0 +1,106 @@
+/*-- scss:defaults --*/
+$body-bg: #050a14;
+$body-color: #e9f1ff;
+$link-color: #2fd9ff;
+$presentation-heading-color: #f5f8ff;
+$presentation-font-size-root: 31px;
+$presentation-line-height: 1.32;
+$presentation-heading-font: "Avenir Next", "Segoe UI", sans-serif;
+$font-family-sans-serif: "Source Sans 3", "Helvetica Neue", sans-serif;
+
+/*-- scss:rules --*/
+.reveal {
+  background:
+    radial-gradient(circle at 8% 32%, rgba(42, 191, 255, 0.24), transparent 40%),
+    radial-gradient(circle at 92% 62%, rgba(255, 181, 48, 0.19), transparent 42%),
+    linear-gradient(110deg, #050a14 0%, #09172a 42%, #090c13 100%);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  border: 1px solid rgba(105, 168, 231, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28), inset 0 0 40px rgba(51, 132, 204, 0.08);
+  background: rgba(8, 20, 36, 0.70);
+  padding: 0.75em 0.9em;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.34em;
+}
+
+.reveal .title-slide h1 {
+  font-size: 1.45em;
+  white-space: nowrap;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.reveal .title-slide .subtitle {
+  font-size: 1.12em;
+  line-height: 1.2;
+}
+
+.reveal h2 {
+  color: #89d9ff;
+  font-size: 0.98em;
+}
+
+.reveal h3 {
+  color: #d5e4f8;
+  font-size: 0.76em;
+}
+
+.reveal p,
+.reveal li,
+.reveal td,
+.reveal th {
+  font-size: 0.74em;
+}
+
+.reveal strong {
+  color: #ffffff;
+}
+
+.reveal .callout {
+  font-size: 0.72em;
+  border-radius: 10px;
+  border: 1px solid rgba(100, 183, 255, 0.35);
+  background: rgba(11, 32, 56, 0.52);
+}
+
+.reveal table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reveal table th,
+.reveal table td {
+  border: 1px solid rgba(121, 170, 216, 0.35);
+  padding: 0.24em 0.36em;
+}
+
+.reveal table th {
+  background: rgba(34, 84, 130, 0.46);
+  color: #dff1ff;
+}
+
+.reveal .slide-number {
+  background: rgba(9, 42, 75, 0.76);
+  border: 1px solid rgba(110, 193, 255, 0.38);
+  color: #dff1ff;
+  border-radius: 8px;
+  padding: 0.16em 0.4em;
+}
+
+.reveal .progress {
+  color: #2fd9ff;
+  height: 6px;
+}
