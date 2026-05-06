@@ -3,6 +3,7 @@ title: "From Ad Clicks to Customer Value"
 subtitle: "How Funnel Analysis Improves Marketing Decisions"
 author: "Mengyao Ma"
 date: "2026-04-30"
+image: "../cover.png"
 format:
   revealjs:
     theme: [default, custom.scss]

@@ -1,4 +1,8 @@
 ---
+title: "How Funnel Analysis Improves Marketing Decisions"
+author: "Mengyao Ma"
+date: "2026.5.10"
+image: "../cover.png"
 format:
   html:
     toc: false
