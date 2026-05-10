@@ -3,7 +3,7 @@ title: "From Ad Clicks to Customer Value"
 subtitle: "How Funnel Analysis Improves Marketing Decisions"
 author: "Mengyao Ma"
 date: "2026-04-30"
-image: "../cover.png"
+image: "../cover-20260508.png"
 format:
   revealjs:
     theme: [default, custom.scss]
@@ -19,7 +19,7 @@ execute:
   echo: false
 ---
 
-## 02 / 06 The click problem: activity can look like growth
+## 01 The click problem: activity can look like growth
 
 ### Why top-of-funnel metrics can mislead
 
@@ -32,7 +32,7 @@ execute:
 - Clicks answer: **Who reacted?**
 - Funnel analysis answers: **Who activated, retained, and created value?**
 
-## 03 / 06 A strong funnel connects behavior to economics
+## 02 A strong funnel connects behavior to economics
 
 ### Funnel logic
 
@@ -48,13 +48,13 @@ execute:
 - How much customer value is lost at that stage?
 - Which intervention creates the highest economic impact?
 
-## 04 / 06 Real example: Starbucks Rewards as a customer-value funnel
+## 03 Real example: Starbucks Rewards as a customer-value funnel
 
 **Why this example matters**
 
-- Campaign or offer brings customers into the app / Rewards program.
-- First purchase creates a measurable baseline.
-- Personalized rewards increase repeat visits and lifetime value.
+- Campaign or offer brings customers into the app / Rewards program.                                        
+- First purchase creates a measurable baseline.        
+- Personalized rewards increase repeat visits and lifetime value.                                        
 
 ::: {.columns}
 ::: {.column width="33%"}
@@ -76,7 +76,7 @@ FY2024 consolidated net revenue
 
 _Source: Starbucks Q4 FY2024 results and FY2024 annual report._
 
-## 05 / 06 Decision example: the best lever may not be more clicks
+## 04 Decision example: the best lever may not be more clicks
 
 ### Illustrative funnel math
 
@@ -94,7 +94,7 @@ _Source: Starbucks Q4 FY2024 results and FY2024 annual report._
 - **Option B: Improve activation** - More users reach first value and downstream conversion improves.
 - **Option C: Improve retention** - Often the highest-value lever as repeat revenue rises without repaying acquisition cost.
 
-## 06 / 06 Takeaway: optimize for customer equity, not campaign activity
+## 05 Takeaway: optimize for customer equity, not campaign activity
 
 1. Clicks are a signal, not the destination.
 2. Rank bottlenecks by value loss, not just visibility.

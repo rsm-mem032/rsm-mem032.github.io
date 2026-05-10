@@ -2,7 +2,7 @@
 title: "How Funnel Analysis Improves Marketing Decisions"
 author: "Mengyao Ma"
 date: "2026.5.10"
-image: "../cover.png"
+image: "../cover-20260508.png"
 format:
   html:
     toc: false
