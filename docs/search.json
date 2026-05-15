@@ -84,62 +84,6 @@
     "text": "Closing Notes\nMy three main takeaways from this exercise are:\n\nPoint estimates are only the beginning; uncertainty (SEs and confidence intervals) is essential.\nCLT makes many large-sample tools workable, but assumptions and approximations still matter.\nExperimental design choices (like peeking) directly affect error rates, not just final p-values."
   },
   {
-    "objectID": "projects/project1/index.html",
-    "href": "projects/project1/index.html",
-    "title": "Analysis of Cars",
-    "section": "",
-    "text": "Let’s investigate the relationship between fuel efficiency (mpg) and engine displacement (disp) from the mtcars dataset. Those variables have a correlation of -0.85.\n\n\nHere is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
-  },
-  {
-    "objectID": "projects/project1/index.html#sub-header",
-    "href": "projects/project1/index.html#sub-header",
-    "title": "Analysis of Cars",
-    "section": "",
-    "text": "Here is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download PDF file.\nYou can download my resume below:\nDownload Resume"
-  },
-  {
-    "objectID": "projects/New pre/index.html#a-funnel-connects-ad-clicks-to-real-customer-value",
-    "href": "projects/New pre/index.html#a-funnel-connects-ad-clicks-to-real-customer-value",
-    "title": "From Ad Clicks to Customer Value",
-    "section": "01 A funnel connects ad clicks to real customer value",
-    "text": "01 A funnel connects ad clicks to real customer value\nWhat is a marketing funnel?\nA funnel describes the journey a customer takes — from first seeing your ad to becoming a loyal, repeat buyer. At each stage, some people drop off, just like water leaking through a funnel.\n\nThe five stages\n\nReach — Your ad is shown to a qualified audience\nClick — Someone clicks the ad, signaling interest\nActivate — The user experiences the product’s value for the first time (e.g. completes sign-up, tries a feature)\nPurchase — The user pays, turning interest into revenue\nRetain — The user comes back again and again, building long-term value (also called CLV — Customer Lifetime Value, the total revenue one customer brings over time)"
-  },
-  {
-    "objectID": "projects/New pre/index.html#the-click-problem-activity-can-look-like-growth",
-    "href": "projects/New pre/index.html#the-click-problem-activity-can-look-like-growth",
-    "title": "From Ad Clicks to Customer Value",
-    "section": "02 The click problem: activity can look like growth",
-    "text": "02 The click problem: activity can look like growth\nWhy top-of-funnel metrics can mislead\nTop-of-funnel means the early stages — the metrics you see first, like clicks.\n\nHigh CTR (Click-Through Rate) or low CPC (Cost Per Click) can make a campaign look efficient, even when most clicks never turn into real customers.\nTraffic can increase while retention (customers who keep coming back) and payback (recovering your ad spend) remain poor.\nThe biggest leak isn’t always visible at the top — compare each stage’s drop-off against past data or benchmarks to find it.\n\n\nThe key question shift\n\nClicks answer: Who reacted?\nFunnel analysis answers: Who activated, retained, and created value?"
-  },
-  {
-    "objectID": "projects/New pre/index.html#real-example-starbucks-rewards-as-a-customer-value-funnel",
-    "href": "projects/New pre/index.html#real-example-starbucks-rewards-as-a-customer-value-funnel",
-    "title": "From Ad Clicks to Customer Value",
-    "section": "03 Real example: Starbucks Rewards as a customer-value funnel",
-    "text": "03 Real example: Starbucks Rewards as a customer-value funnel\n\n\n\n\n\n33.8M\nU.S. 90-day active Rewards members (Q4 FY2024)\n\n\n+4%\nYear-over-year membership growth in Q4 FY2024\n\n\n$36.2B\nFY2024 consolidated net revenue\n\n\nSource: Starbucks Q4 FY2024 results and FY2024 annual report."
-  },
-  {
-    "objectID": "projects/New pre/index.html#decision-example-the-best-lever-may-not-be-more-ads",
-    "href": "projects/New pre/index.html#decision-example-the-best-lever-may-not-be-more-ads",
-    "title": "From Ad Clicks to Customer Value",
-    "section": "04 Decision example: the best lever may not be more ads",
-    "text": "04 Decision example: the best lever may not be more ads\nIllustrative funnel math\n\n\n\nStage\nUsers\nDrop-off\n\n\n\n\nClicks\n100,000\n—\n\n\nSign-ups\n12,000\n−88%\n\n\nActivated\n8,160\n−32%\n\n\nFirst purchases\n3,753\n−54%\n\n\nRetained\n3,003\n−20%\n\n\n\n\nStrategic options:\n\nSign-up conversion: Simplify registration and align ad copy with the landing page to reduce the drop-off from clicks to sign-ups.\nFirst purchase conversion: After activation, introduce conversion nudges — first-order discounts, limited-time offers, or personalized recommendations.\n\nA/B testing across both stages helps identify which approach drives the best results."
-  },
-  {
-    "objectID": "projects/New pre/index.html#takeaway-optimize-for-customer-equity-not-campaign-activity",
-    "href": "projects/New pre/index.html#takeaway-optimize-for-customer-equity-not-campaign-activity",
-    "title": "From Ad Clicks to Customer Value",
-    "section": "05 Takeaway: optimize for customer equity, not campaign activity",
-    "text": "05 Takeaway: optimize for customer equity, not campaign activity\n\nClicks are a signal, not the destination.\nRank bottlenecks by value loss — find the stage where the most revenue is escaping, not just the stage with the most visible drop.\n\n\n\n\n\n\n\nThe best marketers do not stop at “what converted?”\nThey ask: “what created customers worth keeping?”"
-  },
-  {
     "objectID": "projects/project3/hw2_questions.html",
     "href": "projects/project3/hw2_questions.html",
     "title": "Replication of Card and Krueger (1994)",
@@ -175,10 +119,115 @@
     "text": "References\n\nCard, David and Alan B. Krueger (1994), Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania, American Economic Review 84(4): 772-793.\nData source: https://davidcard.berkeley.edu/data_sets.html"
   },
   {
+    "objectID": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#a-funnel-connects-ad-clicks-to-real-customer-value",
+    "href": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#a-funnel-connects-ad-clicks-to-real-customer-value",
+    "title": "From Ad Clicks to Customer Value",
+    "section": "01 A funnel connects ad clicks to real customer value",
+    "text": "01 A funnel connects ad clicks to real customer value\nWhat is a marketing funnel?\nA funnel describes the journey a customer takes — from first seeing your ad to becoming a loyal, repeat buyer. At each stage, some people drop off, just like water leaking through a funnel.\n\nThe five stages\n\nReach — Your ad is shown to a qualified audience\nClick — Someone clicks the ad, signaling interest\nActivate — The user experiences the product’s value for the first time (e.g. completes sign-up, tries a feature)\nPurchase — The user pays, turning interest into revenue\nRetain — The user comes back again and again, building long-term value (also called CLV — Customer Lifetime Value, the total revenue one customer brings over time)"
+  },
+  {
+    "objectID": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#the-click-problem-activity-can-look-like-growth",
+    "href": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#the-click-problem-activity-can-look-like-growth",
+    "title": "From Ad Clicks to Customer Value",
+    "section": "02 The click problem: activity can look like growth",
+    "text": "02 The click problem: activity can look like growth\nWhy top-of-funnel metrics can mislead\nTop-of-funnel means the early stages — the metrics you see first, like clicks.\n\nHigh CTR (Click-Through Rate) or low CPC (Cost Per Click) can make a campaign look efficient, even when most clicks never turn into real customers.\nTraffic can increase while retention (customers who keep coming back) and payback (recovering your ad spend) remain poor.\nThe biggest leak isn’t always visible at the top — compare each stage’s drop-off against past data or benchmarks to find it.\n\n\nThe key question shift\n\nClicks answer: Who reacted?\nFunnel analysis answers: Who activated, retained, and created value?"
+  },
+  {
+    "objectID": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#real-example-starbucks-rewards-as-a-customer-value-funnel",
+    "href": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#real-example-starbucks-rewards-as-a-customer-value-funnel",
+    "title": "From Ad Clicks to Customer Value",
+    "section": "03 Real example: Starbucks Rewards as a customer-value funnel",
+    "text": "03 Real example: Starbucks Rewards as a customer-value funnel\n\n\n\n\n\n33.8M\nU.S. 90-day active Rewards members (Q4 FY2024)\n\n\n+4%\nYear-over-year membership growth in Q4 FY2024\n\n\n$36.2B\nFY2024 consolidated net revenue\n\n\nSource: Starbucks Q4 FY2024 results and FY2024 annual report."
+  },
+  {
+    "objectID": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#decision-example-the-best-lever-may-not-be-more-ads",
+    "href": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#decision-example-the-best-lever-may-not-be-more-ads",
+    "title": "From Ad Clicks to Customer Value",
+    "section": "04 Decision example: the best lever may not be more ads",
+    "text": "04 Decision example: the best lever may not be more ads\nIllustrative funnel math\n\n\n\nStage\nUsers\nDrop-off\n\n\n\n\nClicks\n100,000\n—\n\n\nSign-ups\n12,000\n−88%\n\n\nActivated\n8,160\n−32%\n\n\nFirst purchases\n3,753\n−54%\n\n\nRetained\n3,003\n−20%\n\n\n\n\nStrategic options:\n\nSign-up conversion: Simplify registration and align ad copy with the landing page to reduce the drop-off from clicks to sign-ups.\nFirst purchase conversion: After activation, introduce conversion nudges — first-order discounts, limited-time offers, or personalized recommendations.\n\nA/B testing across both stages helps identify which approach drives the best results."
+  },
+  {
+    "objectID": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#takeaway-optimize-for-customer-equity-not-campaign-activity",
+    "href": "projects/New pre/Mengyao_Ma-Funnel_Analysis.html#takeaway-optimize-for-customer-equity-not-campaign-activity",
+    "title": "From Ad Clicks to Customer Value",
+    "section": "05 Takeaway: optimize for customer equity, not campaign activity",
+    "text": "05 Takeaway: optimize for customer equity, not campaign activity\n\nClicks are a signal, not the destination.\nRank bottlenecks by value loss — find the stage where the most revenue is escaping, not just the stage with the most visible drop.\n\n\n\n\n\n\n\nThe best marketers do not stop at “what converted?”\nThey ask: “what created customers worth keeping?”"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download PDF file.\nYou can download my resume below:\nDownload Resume"
+  },
+  {
+    "objectID": "projects/project1/index.html",
+    "href": "projects/project1/index.html",
+    "title": "Analysis of Cars",
+    "section": "",
+    "text": "Let’s investigate the relationship between fuel efficiency (mpg) and engine displacement (disp) from the mtcars dataset. Those variables have a correlation of -0.85.\n\n\nHere is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
+  },
+  {
+    "objectID": "projects/project1/index.html#sub-header",
+    "href": "projects/project1/index.html#sub-header",
+    "title": "Analysis of Cars",
+    "section": "",
+    "text": "Here is a plot:\n\nlibrary(tidyverse)\ndata(mtcars)\nmtcars |&gt;\n  ggplot(aes(mpg, disp)) + \n  geom_point(color=\"dodgerblue4\", size=2)"
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html",
+    "href": "projects/project4/hw3_questions.html",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "",
+    "text": "Blueprinty is a small software company that helps engineering firms prepare blueprints for patent applications. Its marketing team would like to make a strong claim: firms that use Blueprinty’s software are more successful at getting patents awarded.\nThe cleanest way to study that claim would be a before-and-after design for the same firms, or even better, a randomized experiment in which some firms are assigned access to the software and others are not. That is not the data available here. Instead, Blueprinty has collected a cross-section of 1,500 mature engineering firms. For each firm, the dataset records the number of patents awarded in the last five years, the firm’s region, its age since incorporation, and whether it is a Blueprinty customer.\nThat makes the analysis useful, but not automatic. Blueprinty’s customers are not randomly selected. If customer firms are older, concentrated in more patent-intensive regions, or systematically different in ways we cannot observe, then a raw comparison of patent counts could confuse those firm characteristics with the effect of the software. The goal of this article is to move from a naive comparison to a Poisson regression model estimated by maximum likelihood, then translate the fitted model into an interpretable estimate of Blueprinty’s association with patent awards."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#introduction",
+    "href": "projects/project4/hw3_questions.html#introduction",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "",
+    "text": "Blueprinty is a small software company that helps engineering firms prepare blueprints for patent applications. Its marketing team would like to make a strong claim: firms that use Blueprinty’s software are more successful at getting patents awarded.\nThe cleanest way to study that claim would be a before-and-after design for the same firms, or even better, a randomized experiment in which some firms are assigned access to the software and others are not. That is not the data available here. Instead, Blueprinty has collected a cross-section of 1,500 mature engineering firms. For each firm, the dataset records the number of patents awarded in the last five years, the firm’s region, its age since incorporation, and whether it is a Blueprinty customer.\nThat makes the analysis useful, but not automatic. Blueprinty’s customers are not randomly selected. If customer firms are older, concentrated in more patent-intensive regions, or systematically different in ways we cannot observe, then a raw comparison of patent counts could confuse those firm characteristics with the effect of the software. The goal of this article is to move from a naive comparison to a Poisson regression model estimated by maximum likelihood, then translate the fitted model into an interpretable estimate of Blueprinty’s association with patent awards."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#exploring-the-data",
+    "href": "projects/project4/hw3_questions.html#exploring-the-data",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "Exploring the Data",
+    "text": "Exploring the Data\nThe outcome is a count: the number of patents awarded to each firm during the last five years. Customers have a visibly higher average count, but the distribution is right-skewed for both groups. Most firms receive only a few patents, while a small number receive many more.\n\n\n\n\n\n\n\n\nPatent Awards by Customer Status\n\n\nStatus\nFirms\nMean patents\nMedian patents\nFirms with zero patents\n\n\n\n\nNon-customer\n1,019\n3.47\n3.00\n5.9%\n\n\nBlueprinty customer\n481\n4.13\n4.00\n5.0%\n\n\n\n\n\n\n\n\n\n\n\n\nPatent counts are higher for Blueprinty customers, but both groups have skewed count distributions.\n\n\n\n\nThe average non-customer has 3.47 patents, while the average Blueprinty customer has 4.13. That raw difference points in the direction Blueprinty would like, but it is not yet evidence that the software caused the difference.\nOne reason is geography. Customer status is strongly related to region: Blueprinty customers are disproportionately located in the Northeast. If patenting intensity differs by region, the raw customer comparison will be confounded by where the firms are located.\n\n\n\n\n\nBlueprinty customers are much more concentrated in the Northeast than non-customers.\n\n\n\n\nAge is another potential confounder. Older firms may have larger engineering teams, deeper patent portfolios, and more experience navigating the patent office. Customer and non-customer age distributions are not identical, so the regression model below controls flexibly for age.\n\n\n\n\n\n\n\n\nFirm Age by Customer Status\n\n\nStatus\nMean age\nMedian age\n25th percentile\n75th percentile\n\n\n\n\nNon-customer\n26.1\n25.5\n21.0\n31.2\n\n\nBlueprinty customer\n26.9\n26.5\n20.5\n32.5\n\n\n\n\n\n\n\n\n\n\n\n\nFirm age is broadly similar across groups, but the regression will still adjust for age because age is related to patent output."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#a-simple-poisson-model-via-maximum-likelihood",
+    "href": "projects/project4/hw3_questions.html#a-simple-poisson-model-via-maximum-likelihood",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "A Simple Poisson Model via Maximum Likelihood",
+    "text": "A Simple Poisson Model via Maximum Likelihood\nBecause patents are non-negative integer counts, a Normal model is not a natural starting point. A Normal distribution can assign probability to impossible negative values and treats the outcome as continuous. The Poisson distribution is designed for counts, so it is the first model to try.\nStart with the simplest possible version: every firm has the same patent-award rate ():\n[ Y_i (). ]\nFor one firm, the probability mass function is\n[ f(y_i )=. ]\nAssuming the firms are independent and identically distributed under this simple model, the joint likelihood is the product of the individual probabilities:\n[ L(; y_1,,y_n) =_{i=1}^n . ]\nThis simplifies to\n[ L() =. ]\nIn practice, we work with the log-likelihood. It has the same maximizer as the likelihood, and it avoids multiplying many tiny probabilities:\n[ () =L() =_{i=1}^n . ]\nHere is the log-likelihood written directly in R.\n\npoisson_loglikelihood &lt;- function(lambda, Y) {\n  if (length(lambda) != 1 || lambda &lt;= 0) {\n    return(-Inf)\n  }\n\n  sum(-lambda + Y * log(lambda) - lfactorial(Y))\n}\n\nlambda_grid &lt;- seq(0.25, 7, length.out = 400)\nloglik_grid &lt;- data.frame(\n  lambda = lambda_grid,\n  log_likelihood = vapply(lambda_grid, poisson_loglikelihood, numeric(1), Y = Y)\n)\n\nsimple_mle &lt;- optim(\n  par = sample_mean * 0.75,\n  fn = function(lambda) -poisson_loglikelihood(lambda, Y),\n  method = \"L-BFGS-B\",\n  lower = 1e-8\n)\n\nlambda_hat_simple &lt;- as.numeric(simple_mle$par)\n\n\n\n\n\n\nThe log-likelihood peaks at the sample mean, which is the MLE for a one-parameter Poisson model.\n\n\n\n\n\n\n\n\n\n\n\n\nSimple Poisson MLE Check\n\n\nQuantity\nValue\n\n\n\n\nSample mean\n3.684667\n\n\nNumerical MLE from optim()\n3.684667\n\n\nDifference\n0.000000\n\n\n\n\n\n\n\nThe visual MLE is the value of () at the peak of the curve. We can also derive it directly. The derivative of the log-likelihood is\n[ =-n+. ]\nSetting this equal to zero gives\n[ _{MLE}=_i y_i={Y}. ]\nThat result feels right: the mean of a Poisson distribution is (), so the best-fitting single rate is the sample average number of patents, 3.685."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#poisson-regression",
+    "href": "projects/project4/hw3_questions.html#poisson-regression",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "Poisson Regression",
+    "text": "Poisson Regression\nThe one-rate model is useful for learning MLE, but it ignores the actual business question. Firms differ in age, region, and customer status. A Poisson regression lets each firm have its own expected patent count:\n[ Y_i (_i), _i=(X_i’). ]\nThe exponential link matters because (_i) must be positive. The linear predictor (X_i’) can be any real number, but ((X_i’)) is always greater than zero.\nFor this model, the log-likelihood becomes\n[ () =_{i=1}^n . ]\nThe design matrix includes an intercept, age, age squared, region indicators, and customer status. I include age squared because the relationship between age and patenting is unlikely to be perfectly linear. I include all but one region indicator because the intercept already represents the omitted baseline region; including every region dummy plus an intercept would create perfect collinearity.\n\nX &lt;- model.matrix(\n  ~ age + I(age^2) + region + iscustomer,\n  data = blueprinty\n)\n\npoisson_regression_loglikelihood &lt;- function(beta, Y, X) {\n  eta &lt;- as.vector(X %*% beta)\n  lambda &lt;- exp(eta)\n\n  sum(Y * eta - lambda - lfactorial(Y))\n}\n\nstart &lt;- rep(0, ncol(X))\nstart[1] &lt;- log(mean(Y))\n\nmle_regression &lt;- optim(\n  par = start,\n  fn = function(beta) -poisson_regression_loglikelihood(beta, Y, X),\n  method = \"BFGS\",\n  hessian = TRUE,\n  control = list(maxit = 10000, reltol = 1e-12)\n)\n\nbeta_hat &lt;- mle_regression$par\nnames(beta_hat) &lt;- colnames(X)\n\n# Since we minimized the negative log-likelihood, the Hessian is the\n# observed information matrix. Its inverse is the covariance estimate.\nvcov_mle &lt;- solve(mle_regression$hessian)\nse_mle &lt;- sqrt(diag(vcov_mle))\n\nglm_fit &lt;- glm(\n  patents ~ age + I(age^2) + region + iscustomer,\n  family = poisson(link = \"log\"),\n  data = blueprinty\n)\n\n\n\n\n\n\n\n\n\nHand-Coded MLE vs. Poisson GLM\n\n\nTerm\nManual MLE\nManual SE\nglm() estimate\nglm() SE\n\n\n\n\nIntercept: Midwest non-customer\n1.0931\n0.1019\n−0.5089\n0.1832\n\n\nAge\n0.0367\n0.0058\n0.1486\n0.0139\n\n\nAge squared\n−0.0010\n0.0001\n−0.0030\n0.0003\n\n\nRegion: Northeast\n−0.0500\n0.0421\n0.0292\n0.0436\n\n\nRegion: Northwest\n−0.0496\n0.0514\n−0.0176\n0.0538\n\n\nRegion: South\n−0.0180\n0.0508\n0.0566\n0.0527\n\n\nRegion: Southwest\n−0.0555\n0.0458\n0.0506\n0.0472\n\n\nBlueprinty customer\n0.0424\n0.0313\n0.2076\n0.0309\n\n\n\n\n\n\n\nThe hand-coded likelihood and glm() estimates agree to within 1.6, which is the main diagnostic that the likelihood was coded correctly. The standard errors also line up closely. Small last-decimal differences can occur because optim() uses a numerical Hessian, while glm() uses the standard machinery for generalized linear models.\n\n\n\n\n\nThe customer coefficient is positive even after controlling for age and region.\n\n\n\n\nThe age terms suggest a curved relationship: expected patent counts rise with firm age at first, but the negative squared term means the increase eventually flattens and turns down. The region coefficients are small relative to their uncertainty in this specification. The main coefficient of interest is iscustomer, which is positive and precisely estimated.\nBecause the model is log-linear, the customer coefficient is easiest to read after exponentiating:\n\n\n\n\n\n\n\n\nCustomer Status Effect on the Rate Scale\n\n\nQuantity\nValue\n\n\n\n\nCustomer coefficient\n0.0424\n\n\nIncidence rate ratio\n1.043\n\n\nImplied percent difference\n4.3%\n\n\n95% IRR interval\nNA to NA\n\n\n\n\n\n\n\nHolding age and region fixed, Blueprinty customers are estimated to have about 4.3% higher expected patent counts than otherwise similar non-customers."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#the-effect-of-blueprintys-software",
+    "href": "projects/project4/hw3_questions.html#the-effect-of-blueprintys-software",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "The Effect of Blueprinty’s Software",
+    "text": "The Effect of Blueprinty’s Software\nThe coefficient is useful, but it is still not in the most intuitive units. A coefficient of 0.042 means “higher log expected patents,” not “this many additional patents.” To translate the model into patent counts, I create two counterfactual datasets:\n\n(X_0): every firm is treated as a non-customer.\n(X_1): every firm is treated as a Blueprinty customer.\n\nAge and region stay exactly as observed for each firm. Only customer status changes.\n\nblueprinty_0 &lt;- blueprinty\nblueprinty_1 &lt;- blueprinty\n\nblueprinty_0$iscustomer &lt;- 0\nblueprinty_1$iscustomer &lt;- 1\n\nX0 &lt;- model.matrix(~ age + I(age^2) + region + iscustomer, data = blueprinty_0)\nX1 &lt;- model.matrix(~ age + I(age^2) + region + iscustomer, data = blueprinty_1)\n\nyhat0 &lt;- as.vector(exp(X0 %*% beta_hat))\nyhat1 &lt;- as.vector(exp(X1 %*% beta_hat))\n\nfirm_lift &lt;- yhat1 - yhat0\naverage_effect &lt;- mean(firm_lift)\n\n\n\n\n\n\n\n\n\nCounterfactual Expected Patent Counts\n\n\nScenario\nMean expected patents over five years\n\n\n\n\nAll firms set to non-customer\n3.679\n\n\nAll firms set to Blueprinty customer\n3.839\n\n\nAverage customer effect\n0.159\n\n\n\n\n\n\n\n\n\n\n\n\nThe model implies larger absolute gains for firms with higher baseline expected patent counts.\n\n\n\n\nThe fitted model estimates that being a Blueprinty customer is associated with an average increase of about 0.16 patents over five years, holding each firm’s age and region fixed. This is the most direct version of Blueprinty’s marketing claim in the units the business cares about.\nThe careful interpretation is still observational. The model adjusts for age and region, and after those adjustments the customer association remains positive. But it does not prove that the software caused the increase. Customer firms may differ in unobserved ways: they may have larger R&D budgets, stronger legal teams, more aggressive patent strategies, or a greater tendency to buy tools that support patent applications. The evidence is consistent with Blueprinty’s claim, but a randomized rollout or credible before-and-after design would be needed for a stronger causal conclusion."
+  },
+  {
+    "objectID": "projects/project4/hw3_questions.html#conclusion",
+    "href": "projects/project4/hw3_questions.html#conclusion",
+    "title": "Poisson Regression and Maximum Likelihood Estimation",
+    "section": "Conclusion",
+    "text": "Conclusion\nMaximum likelihood estimation provides the bridge from a probability model to an empirical answer. The simple Poisson model shows how the MLE selects the rate that makes the observed patent counts most likely. The regression model applies the same logic with a richer rate parameter, (_i=(X_i’)), so that firms can differ by age, region, and customer status.\nIn this dataset, Blueprinty customers receive more patents on average, and that positive relationship remains after controlling for observed firm characteristics. The estimated association is about 4.3% higher expected patent counts, or roughly 0.16 additional patents over five years for the average firm in the sample."
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "My Projects",
     "section": "",
-    "text": "From Ad Clicks to Customer Value\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 30, 2026\n\n\n\n\n\n\n\n\n\n\n\nReplication of Card and Krueger (1994)\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 22, 2026\n\n\n\n\n\n\n\n\n\n\n\nA/B Testing a Call to Action\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 13, 2026\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of Cars\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 6, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Poisson Regression and Maximum Likelihood Estimation\n\n\n\n\n\n\nMengyao Ma\n\n\nMay 15, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nFrom Ad Clicks to Customer Value\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 30, 2026\n\n\n\n\n\n\n\n\n\n\n\nReplication of Card and Krueger (1994)\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 22, 2026\n\n\n\n\n\n\n\n\n\n\n\nA/B Testing a Call to Action\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 13, 2026\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of Cars\n\n\n\n\n\n\nMengyao Ma\n\n\nApr 6, 2026\n\n\n\n\n\n\nNo matching items"
   }
 ]
