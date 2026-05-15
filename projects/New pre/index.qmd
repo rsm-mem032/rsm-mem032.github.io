@@ -25,6 +25,8 @@ execute:
 
 A funnel describes the journey a customer takes — from first seeing your ad to becoming a loyal, repeat buyer. At each stage, some people drop off, just like water leaking through a funnel.
 
+<div class="fragment">
+
 ### The five stages
 
 1. **Reach** — Your ad is shown to a qualified audience
@@ -32,6 +34,8 @@ A funnel describes the journey a customer takes — from first seeing your ad to
 3. **Activate** — The user experiences the product's value for the first time (e.g. completes sign-up, tries a feature)
 4. **Purchase** — The user pays, turning interest into revenue
 5. **Retain** — The user comes back again and again, building long-term value (also called CLV — Customer Lifetime Value, the total revenue one customer brings over time)
+
+</div>
 
 ---
 
@@ -45,10 +49,14 @@ Top-of-funnel means the early stages — the metrics you see first, like clicks.
 - Traffic can increase while retention (customers who keep coming back) and payback (recovering your ad spend) remain poor.
 - The biggest leak isn't always visible at the top — compare each stage's drop-off against past data or benchmarks to find it.
 
+<div class="fragment">
+
 ### The key question shift
 
 - Clicks answer: **Who reacted?**
 - Funnel analysis answers: **Who activated, retained, and created value?**
+
+</div>
 
 ---
 
@@ -100,7 +108,7 @@ FY2024 consolidated net revenue
 | Retained | 3,003 | −20% |
 
 
-
+<div class="fragment">
 **Strategic options:**
 
 1. **Sign-up conversion:** Simplify registration and align ad copy with the landing page to reduce the drop-off from clicks to sign-ups.
@@ -108,6 +116,7 @@ FY2024 consolidated net revenue
 
 *A/B testing across both stages helps identify which approach drives the best results.*
 
+</div>
 
 ---
 
